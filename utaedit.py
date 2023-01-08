@@ -2062,7 +2062,7 @@ class TheWindow(wx.Panel):
 			sys.exit()
 
 app = wx.App()
-mainframe = wx.Frame(None, -1, "Song Tag Editor", size = (1024, 800))
+mainframe = wx.Frame(None, -1, "UtaEdit", size = (1024, 800))
 # call the derived class
 TheWindow(mainframe,-1)
 mainframe.Show(1)
