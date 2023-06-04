@@ -1534,7 +1534,7 @@ class TheWindow(wx.Panel):
 							if potentialSameTag=="artist":
 								self.artistfield.SetValue("")
 							elif potentialSameTag=="albumartist":
-								self.artistfield.SetValue("")
+								self.albumartistfield.SetValue("")
 							elif potentialSameTag=="tracknumber":
 								self.trackfield.SetValue("")
 							elif potentialSameTag=="discnumber":
