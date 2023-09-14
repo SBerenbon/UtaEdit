@@ -1199,12 +1199,18 @@ class TheWindow(wx.Panel):
 							songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
 						elif tag=="discnumber":
 							if self.discnumbercheck.IsChecked()==1:
-								if len(self.discnumberfield.GetValue()) and self.discnumberfield.GetValue()!=currentTags[tag]:
-									songid3data[tagToUse] = self.discnumberfield.GetValue()
+								if self.discnumberfield.GetValue()!=currentTags[tag]:
+									if len(self.discnumberfield.GetValue()):
+										songid3data[tagToUse] = self.discnumberfield.GetValue()
+									else:
+										del songid3data[tagToUse]
 							else:
 								#if len(self.loadedSongsList[myplace][tag]) and tag not in currentTags or currentTags[tag]!=self.loadedSongsList[myplace][tag]:
 								if len(self.loadedSongsList[myplace][tag].strip()):
 									songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+								else:
+									del songid3data[tagToUse]
+
 						elif tag=="date":
 							if self.datecheck.IsChecked()==1:
 								if self.datefield.GetValue()!=currentTags[tag]:
