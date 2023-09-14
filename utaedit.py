@@ -1080,7 +1080,10 @@ class TheWindow(wx.Panel):
 							if tag=="comments" and type(songid3data)==EasyMP4:
 								tagToUse="comment"
 							if self.loadedSongsList[myplace][tag]:
-								songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
+								try:
+									songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+								except ValueError:
+									print("Bad value for tag "+tag+" for file "+song+": "+self.loadedSongsList[myplace][tag])
 							else:
 								del songid3data[tag]
 			if "unfriendly" in self.loadedSongsList[myplace]:
@@ -1179,140 +1182,143 @@ class TheWindow(wx.Panel):
 					validTag=True
 				if validTag:
 				#terminate if this is an ASF file and the tag doesn't have an ASF equivalent
-					if tag=="artist":
-						if self.artistcheck.IsChecked()==1:
-							if self.artistfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.artistfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="albumartist":
-						if self.albumartistcheck.IsChecked()==1:
-							if self.albumartistfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.albumartistfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="tracknumber" and len(self.loadedSongsList[myplace][tag].strip()):
-						songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="discnumber":
-						if self.discnumbercheck.IsChecked()==1:
-							if len(self.discnumberfield.GetValue()) and self.discnumberfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.discnumberfield.GetValue()
-						else:
-							#if len(self.loadedSongsList[myplace][tag]) and tag not in currentTags or currentTags[tag]!=self.loadedSongsList[myplace][tag]:
-							if len(self.loadedSongsList[myplace][tag].strip()):
-								songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="date":
-						if self.datecheck.IsChecked()==1:
-							if self.datefield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.datefield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="title":
-						songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="album":
-						if self.albumcheck.IsChecked()==1:
-							if self.albumfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.albumfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="genre":
-						if self.genrecheck.IsChecked()==1:
-							if self.genrefield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.genrefield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="composer":
-						if self.composercheck.IsChecked()==1:
-							if self.composerfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.composerfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="conductor":
-						if self.conductorcheck.IsChecked()==1:
-							if self.conductorfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.conductorfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="encodedby":
-						if self.encodedbycheck.IsChecked()==1:
-							if self.encodedbyfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.encodedbyfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="encodersettings":
-						if self.encodersettingscheck.IsChecked()==1:
-							if self.encodersettingsfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.encodersettingsfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="bpm":
-						if self.bpmcheck.IsChecked()==1:
-							if self.bpmfield.GetValue()!=currentTags[tag]:
-								if len(self.bpmfield.GetValue())==0:
+					try:
+						if tag=="artist":
+							if self.artistcheck.IsChecked()==1:
+								if self.artistfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.artistfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="albumartist":
+							if self.albumartistcheck.IsChecked()==1:
+								if self.albumartistfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.albumartistfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="tracknumber" and len(self.loadedSongsList[myplace][tag].strip()):
+							songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="discnumber":
+							if self.discnumbercheck.IsChecked()==1:
+								if len(self.discnumberfield.GetValue()) and self.discnumberfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.discnumberfield.GetValue()
+							else:
+								#if len(self.loadedSongsList[myplace][tag]) and tag not in currentTags or currentTags[tag]!=self.loadedSongsList[myplace][tag]:
+								if len(self.loadedSongsList[myplace][tag].strip()):
+									songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="date":
+							if self.datecheck.IsChecked()==1:
+								if self.datefield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.datefield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="title":
+							songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="album":
+							if self.albumcheck.IsChecked()==1:
+								if self.albumfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.albumfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="genre":
+							if self.genrecheck.IsChecked()==1:
+								if self.genrefield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.genrefield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="composer":
+							if self.composercheck.IsChecked()==1:
+								if self.composerfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.composerfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="conductor":
+							if self.conductorcheck.IsChecked()==1:
+								if self.conductorfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.conductorfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="encodedby":
+							if self.encodedbycheck.IsChecked()==1:
+								if self.encodedbyfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.encodedbyfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="encodersettings":
+							if self.encodersettingscheck.IsChecked()==1:
+								if self.encodersettingsfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.encodersettingsfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="bpm":
+							if self.bpmcheck.IsChecked()==1:
+								if self.bpmfield.GetValue()!=currentTags[tag]:
+									if len(self.bpmfield.GetValue())==0:
+										if tagToUse in songid3data:
+											del songid3data[tagToUse]
+									else:
+										songid3data[tagToUse] = self.bpmfield.GetValue()
+							else:
+								if len(self.loadedSongsList[myplace][tag])==0:
 									if tagToUse in songid3data:
 										del songid3data[tagToUse]
 								else:
-									songid3data[tagToUse] = self.bpmfield.GetValue()
-						else:
-							if len(self.loadedSongsList[myplace][tag])==0:
-								if tagToUse in songid3data:
-									del songid3data[tagToUse]
+									songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="organization":
+							if self.organizationcheck.IsChecked()==1:
+								if self.organizationfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.organizationfield.GetValue()
 							else:
 								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
-					elif tag=="organization":
-						if self.organizationcheck.IsChecked()==1:
-							if self.organizationfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.organizationfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="website":
-						if self.websitecheck.IsChecked()==1:
-							if self.websitefield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.websitefield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="copyright":
-						if self.copyrightcheck.IsChecked()==1:
-							if self.copyrightfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.copyrightfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="isrc":
-						if self.isrccheck.IsChecked()==1:
-							if self.isrcfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.isrcfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="version":
-						if self.versioncheck.IsChecked()==1:
-							if self.versionfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.versionfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="cdinfo":
-						if self.cdinfocheck.IsChecked()==1:
-							if self.cdinfofield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.cdinfofield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="length":
-						if self.lengthcheck.IsChecked()==1:
-							if self.lengthfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.lengthfield.GetValue()
-						else:
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="comments":
-						if type(songid3data)==EasyMP4:
-							tagToUse="comment"
-						if self.commentscheck.IsChecked()==1:
-							if self.commentsfield.GetValue()!=currentTags[tag]:
-								songid3data[tagToUse] = self.commentsfield.GetValue()
-						else:
-							if tag in self.loadedSongsList[myplace]:
-								songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
-					elif tag=="lyrics":
-						songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="website":
+							if self.websitecheck.IsChecked()==1:
+								if self.websitefield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.websitefield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="copyright":
+							if self.copyrightcheck.IsChecked()==1:
+								if self.copyrightfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.copyrightfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="isrc":
+							if self.isrccheck.IsChecked()==1:
+								if self.isrcfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.isrcfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="version":
+							if self.versioncheck.IsChecked()==1:
+								if self.versionfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.versionfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="cdinfo":
+							if self.cdinfocheck.IsChecked()==1:
+								if self.cdinfofield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.cdinfofield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="length":
+							if self.lengthcheck.IsChecked()==1:
+								if self.lengthfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.lengthfield.GetValue()
+							else:
+								songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="comments":
+							if type(songid3data)==EasyMP4:
+								tagToUse="comment"
+							if self.commentscheck.IsChecked()==1:
+								if self.commentsfield.GetValue()!=currentTags[tag]:
+									songid3data[tagToUse] = self.commentsfield.GetValue()
+							else:
+								if tag in self.loadedSongsList[myplace]:
+									songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
+						elif tag=="lyrics":
+							songid3data[tagToUse] = self.loadedSongsList[myplace][tag]
 
+					except ValueError:
+						print("Bad value for tag "+tag+" for file "+song+": either "+self.loadedSongsList[myplace][tag]+" or the value in the "+tag+" field.")
 			#it's gotta write all modifications! not just the "all songs" ones! title and track!
 			#don't just care about myplace! loop through all selections!
 			#it only writes to the first one...it should repeat the process of giving new tags for each
