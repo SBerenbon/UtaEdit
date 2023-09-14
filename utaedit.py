@@ -1079,7 +1079,10 @@ class TheWindow(wx.Panel):
 							tagToUse=tag
 							if tag=="comments" and type(songid3data)==EasyMP4:
 								tagToUse="comment"
-							songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
+							if self.loadedSongsList[myplace][tag]:
+								songid3data[tagToUse]=self.loadedSongsList[myplace][tag]
+							else:
+								del songid3data[tag]
 			if "unfriendly" in self.loadedSongsList[myplace]:
 				songid3data.save(song)
 
