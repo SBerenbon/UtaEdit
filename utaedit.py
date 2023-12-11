@@ -1837,7 +1837,7 @@ class TheWindow(wx.Panel):
 				del self.tempalbumartfilenamestorage[songid]
 			self.clearVisibleArt()
 			#something wrong with self.loadedSongsList?
-			#If that, each song gets the next song's tag, and the last song fucks things up
+			#If that, each song gets the next song's tag, and the last song messes things up
 			#delete reversed?
 			self.cleaners()
 			self.loadedSongs.SetSelection(-1)
