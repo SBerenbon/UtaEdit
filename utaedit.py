@@ -2039,7 +2039,7 @@ class TheWindow(wx.Panel):
 				songtoexportfrom=self.loadedSongs.GetStrings()[songtoexportfromIndex]#self.loadedSongs.GetStrings():
 				lyricsFilename=os.path.splitext(os.path.split(songtoexportfrom)[1])[0]+".txt"
 				#make it in the same folder as the song?
-				writethistothis(self.loadedSongsList[songtoexportfromIndex]["lyrics"], lyricsFilename)
+				writethistothis(self.loadedSongsList[songtoexportfromIndex]["lyrics"], os.path.join(os.path.split(songtoexportfrom)[0], lyricsFilename))
 
 	def ClearTheSongs(self, event):
 		self.loadedSongs.Clear()
