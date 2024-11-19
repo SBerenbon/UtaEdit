@@ -142,7 +142,7 @@ apicarttypedict={3:"Cover",
 20:"Publisher Logotype"}
 
 def makeintoafilename(thetext):
-	return thetext.replace("?", "").replace("/", "-").replace(":", "-")
+	return thetext.replace("?", "").replace("/", "--").replace(":", "-")
 
 def picTypeGetter(pic):
 	if hasattr(pic, "mime") and len(pic.mime):
