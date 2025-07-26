@@ -770,7 +770,7 @@ class TheWindow(wx.Panel):
 			try:
 				newpics=[]
 				for pic in songid3data.pictures:
-					if pic.type!=self.currentarttype:
+					if pic.type!=self.currentarttype and not all:
 						newpics.append(pic)
 				songid3data.clear_pictures()
 				for pic in newpics:
