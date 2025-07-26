@@ -1142,7 +1142,7 @@ class TheWindow(wx.Panel):
 					unfriendly=getUnfriendlyTags(songid3data)
 					localUnfriendlyKeys=self.loadedSongsList[myplace]["unfriendly"].keys()
 					for unfriendlyKey in localUnfriendlyKeys:
-						if songid3data[unfriendlyKey]!=self.loadedSongsList[myplace]["unfriendly"][unfriendlyKey]:
+						if unfriendlyKey not in songid3data or songid3data[unfriendlyKey]!=self.loadedSongsList[myplace]["unfriendly"][unfriendlyKey]:
 							songid3data[unfriendlyKey]=self.loadedSongsList[myplace]["unfriendly"][unfriendlyKey]
 					fileUnfriendlyKeys=getUnfriendlyTags(songid3data)
 					for fileUnfriendlyKey in fileUnfriendlyKeys:
